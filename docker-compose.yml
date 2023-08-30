@@ -1,0 +1,20 @@
+version: '3'
+services:
+  zincsearch:
+    image: public.ecr.aws/zinclabs/zincsearch:latest
+    ports:
+      - "4080:4080"
+    environment:
+      - ZINC_DATA_PATH=/data
+      - ZINC_FIRST_ADMIN_USER=admin
+      - ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
+    volumes:
+      - ./data:/data
+  goapp:
+    image: golang:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app:/go/src/app
+    working_dir: /go/src/app
+    command: go run main.go
