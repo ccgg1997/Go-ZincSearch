@@ -24,6 +24,8 @@ ZincSearch es un motor de búsqueda de código abierto diseñado para ser rápid
 6. ZincSearch deberia estar ejecutando en  `http://localhost:4080`.
 ![image](https://github.com/ccgg1997/Go-ZincSearch/assets/89625031/7632a238-cd68-4e83-b79d-df15ef52bd93)
 
+## Importante
+-En la carpeta app/ se encuetra el archivo main.go
 
 
 
