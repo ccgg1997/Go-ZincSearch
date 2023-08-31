@@ -11,11 +11,12 @@ services:
     volumes:
       - ./data:/data
   goapp:
-    image: golang:latest
+    build: .
     ports:
       - "8080:8080"
+      - "6061:6060"
     volumes:
       - ./app:/go/src/app
     working_dir: /go/src/app
-    command: go run main.go
     restart: on-failure
+    command: gin -i run main.go

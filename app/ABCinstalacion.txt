@@ -1,0 +1,7 @@
+crear carpeta
+dentro de carpeta go init mod "ruta unica" (crear go.sum y go.mod)
+luego en la carpeta raiz crear archivo go.work (donde se apunte a la carpeta de laapp, eje: "go 1.21.0
+    use ./app" )
+
+http://localhost:6061/debug/pprof/ para acceder al profiling
+actualizar go mod tidy   
