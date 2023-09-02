@@ -5,23 +5,41 @@ import (
 	"log"
 	"net/http"
 	_ "net/http/pprof"
-	"os"
-
-	"github.com/google/uuid"
 )
 
+type authenticationInfo struct {
+	username string
+	password string
+}
+
+// area has a receiver of (r rect)
+func (a authenticationInfo) getBasicAuth() string {
+	return fmt.Sprintf("Authorization: Basic %s:%s", a.username, a.password)
+}
+
+// ?
+// don't touch below this line
+func test(authInfo authenticationInfo) {
+	fmt.Println(authInfo.getBasicAuth())
+	fmt.Println("====================================")
+}
+
 func main() {
-	//iniciar servidor de profiling en un goroutine
 	go func() {
 		log.Println(http.ListenAndServe("0.0.0.0:6060", nil))
 	}()
-	fmt.Println(uuid.New().String())
-	fmt.Println("si estamos en main Hola mundo ")
-	fmt.Printf("si estamos en main Hola mundos1234589 %s", uuid.New().String())
+	test(authenticationInfo{
+		username: "Google",
+		password: "12345",
+	})
+	test(authenticationInfo{
+		username: "Bing",
+		password: "98765",
+	})
+	test(authenticationInfo{
+		username: "DDG",
+		password: "76921",
+	})
 
-	// Forzar a vaciar el búfer de salida
-	os.Stdout.Sync()
-
-	// Bucle infinito para mantener el programa en ejecución
 	select {}
 }
