@@ -10,13 +10,24 @@ services:
       - ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
     volumes:
       - ./data:/data
+    networks:
+      - mynetwork
   goapp:
     build: .
+    environment:
+      - ZINC_DATA_PATH=/data
+      - ZINC_FIRST_ADMIN_USER=admin
+      - ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
     ports:
       - "8080:8080"
       - "6061:6060"
     volumes:
       - ./app:/go/src/app
-    working_dir: /go/src/app
+    working_dir: /go/src/app/cmd/main
     restart: on-failure
     command: gin -i run main.go
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge

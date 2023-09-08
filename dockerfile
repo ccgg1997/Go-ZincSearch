@@ -13,7 +13,7 @@ RUN go install github.com/codegangsta/gin@latest
 # Copia el código local al contenedor
 COPY ./app .
 
-# Expone el puerto 8080
+# Expone el puerto 8080 y 6061
 EXPOSE 6061 8080 
 
 

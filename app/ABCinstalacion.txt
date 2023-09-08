@@ -5,3 +5,15 @@ luego en la carpeta raiz crear archivo go.work (donde se apunte a la carpeta de 
 
 http://localhost:6061/debug/pprof/ para acceder al profiling
 actualizar go mod tidy   
+
+"comandos de teclado"
+||
+
+***************go help *****************
+
+gofmt -w . (formato a todo)
+go test -v ./...
+
+//modulos
+go mod init
+go mod tidy
