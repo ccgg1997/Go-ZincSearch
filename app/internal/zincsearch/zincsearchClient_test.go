@@ -2,6 +2,7 @@ package zincsearch
 
 import (
 	"testing"
+	"os"
 )
 
 func NEWCLIENT(url, user, password string) *NewZincSearchClient {
@@ -13,7 +14,7 @@ func NEWCLIENT(url, user, password string) *NewZincSearchClient {
 }
 
 func Test_checkClient(t *testing.T) {
-	r := NEWCLIENT("http://zincsearch:4080/", "user", "password")
+	r := NEWCLIENT(os.Getenv("ZINC_API_URL"), "user", "password")
 	err := r.checkClient()
 
 	if err != nil {

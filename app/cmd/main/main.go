@@ -1,42 +1,38 @@
 package main
 
 import (
-	"fmt"
-	"io"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
 
-	"github.com/google/uuid"
+	"github.com/ccgg1997/Go-ZincSearch/email/gateway"
+	customHTTP "github.com/ccgg1997/Go-ZincSearch/email/http"
+	"github.com/ccgg1997/Go-ZincSearch/email/usecase"
 )
 
 func main() {
 
-	//iniciar servidor de profiling en un goroutine
+	// Iniciar servidor de profiling en un goroutine
 	go func() {
 		log.Println(http.ListenAndServe("0.0.0.0:6060", nil))
 	}()
+	
 
+	// Crear una instancia de EmailGateway
+	emailGateway := gateway.NewEmailGateway("history")
 
-	//prueba de impresion de uuid
-	fmt.Printf("si estamos en main, Hola mundo, entrada numero: %s \n", uuid.New().String())
+	// Crear una instancia de EmailUsecase
+	emailUsecase := usecase.NewEmailUsecase(*emailGateway)
 
-	//servidor web principal
-	http.HandleFunc("/miruta", func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, "mi ruta personalizada")
-	})
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
-	fmt.Println(uuid.New().String())
+	// Crear una instancia de EmailHandler
+	emailHandler := customHTTP.NewEmailHandler(*emailUsecase)
+
+	// Iniciar servidor web
+	mux := Routes(emailHandler)
+	server := NewServer(mux)
+	server.Run()
 
 	// Forzar a vaciar el búfer de salida
 	os.Stdout.Sync()
-
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Hay peticiones en ejecucion")
-	io.WriteString(w, "Hola mundo")
-
 }

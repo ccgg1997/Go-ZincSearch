@@ -16,4 +16,4 @@ go test -v ./...
 
 //modulos
 go mod init
-go mod tidy
+go mod tidy (agregar e instalar modulos)
