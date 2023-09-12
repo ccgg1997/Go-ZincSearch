@@ -21,8 +21,11 @@ func main() {
 		log.Println(http.ListenAndServe("0.0.0.0:6060", nil))
 	}()
 
-	fmt.Println(scripts.IngestaDeDatos())
-
+	go func() {
+		if true {
+			fmt.Println(scripts.IngestaDeDatos())
+		}
+	}()
 	// Crear una instancia de EmailGateway
 	emailGateway := gateway.NewEmailGateway("email")
 	// Crear una instancia de EmailUsecase

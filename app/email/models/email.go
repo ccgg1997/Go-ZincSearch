@@ -1,12 +1,12 @@
 package models
 
 import (
-	"time"
 	"errors"
+	"time"
 )
 
 type Email struct {
-	Date    time.Time
+	Date    string
 	From    string
 	To      string
 	Subject string
@@ -16,20 +16,26 @@ type Email struct {
 }
 
 type CreateEmailCMD struct {
-	Date    time.Time `json:"date"`
-	From    string    `json:"from"`
-	To      string    `json:"to"`
-	Subject string    `json:"subject"`
-	XFrom   string    `json:"xfrom"`
-	XTo     string    `json:"xto"`
-	Content string    `json:"content"`
+	Date    string `json:"date"`
+	From    string `json:"from"`
+	To      string `json:"to"`
+	Subject string `json:"subject"`
+	XFrom   string `json:"xfrom"`
+	XTo     string `json:"xto"`
+	Content string `json:"content"`
 }
 
 func (e *CreateEmailCMD) Validate() error {
-	// check if the date that is not in the future
-	if e.Date.After(time.Now()) {
+	// Parsear el campo Date a un objeto time.Time
+	layout := "2006-01-02"
+	parsedDate, err := time.Parse(layout, e.Date)
+	if err != nil {
+		return errors.New("invalid date format" + err.Error())
+	}
+
+	// Verificar si la fecha está en el futuro
+	if parsedDate.After(time.Now()) {
 		return errors.New("date cannot be in the future")
 	}
 	return nil
 }
-
