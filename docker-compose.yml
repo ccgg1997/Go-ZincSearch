@@ -18,8 +18,9 @@ services:
       - ZINC_DATA_PATH=/data
       - ZINC_FIRST_ADMIN_USER=admin
       - ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123
+      - ZINC_API_URL=http://zincsearch:4080
     ports:
-      - "8080:8080"
+      - "8080:8088"
       - "6061:6060"
     volumes:
       - ./app:/go/src/app
