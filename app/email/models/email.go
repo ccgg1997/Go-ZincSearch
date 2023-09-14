@@ -13,6 +13,7 @@ type Email struct {
 	XFrom   string
 	XTo     string
 	Content string
+	Folder  string
 }
 
 type CreateEmailCMD struct {
@@ -23,6 +24,7 @@ type CreateEmailCMD struct {
 	XFrom   string `json:"xfrom"`
 	XTo     string `json:"xto"`
 	Content string `json:"content"`
+	Folder  string `json:"folder"`
 }
 
 func (e *CreateEmailCMD) Validate() error {

@@ -67,8 +67,10 @@ func CheckIndexExists() (bool, error) {
 }
 
 func readEmailData() int {
-	root := "../../data/enron_mail_20110402/maildir/allen-p" // Cambia esto a la ruta de tu carpeta principal
+
+	root := "../../data/enron_mail_20110402/maildir/allen-p/_sent_mail/ejemplo"
 	var count int
+	var errorMails []string
 	err := filepath.Walk(root,
 		func(path string, info os.FileInfo, err error) error {
 			if err != nil {
@@ -82,10 +84,13 @@ func readEmailData() int {
 				if err != nil {
 					return err
 				}
+				defer file.Close()
 				reader := bufio.NewReader(file)
 				email, err := mail.ReadMessage(reader)
 				if err != nil {
-					return err
+					mailWrong := fmt.Sprintf("Error al leer el correo electrónico: %s\n, path %s", err, path)
+					errorMails = append(errorMails, mailWrong)
+					return nil
 				}
 
 				from := email.Header.Get("From")
@@ -104,18 +109,13 @@ func readEmailData() int {
 				}
 				body := string(bodyByte)
 
+				folder := email.Header.Get("X-Folder")
 				//crear structura
 				r := NewEmail(
-					date, from, to, subject, xFrom, xTo, body)
+					date, from, to, subject, xFrom, xTo, body, folder)
 				storeEmail(*r)
 				// Imprime información sobre el correo electrónico
-				fmt.Println(r.Date)
-				fmt.Println(r.From)
-				fmt.Println(r.To)
-				fmt.Println(r.XTo)
-				fmt.Println(r.XFrom)
-				fmt.Println(r.Content)
-
+				fmt.Println(r)
 				count++
 
 			}
@@ -128,6 +128,7 @@ func readEmailData() int {
 	}
 
 	fmt.Printf("Se encontraron %d archivos .txt\n", count)
+	fmt.Printf("Se encontraron %d errores en los archivos .txt\n %s", len(errorMails), errorMails)
 
 	return count
 }
@@ -161,7 +162,7 @@ func storeEmail(email models.CreateEmailCMD) error {
 	return nil
 }
 
-func NewEmail(date string, from string, to string, subject string, xfrom string, xto string, content string) *models.CreateEmailCMD {
+func NewEmail(date string, from string, to string, subject string, xfrom string, xto string, content string, folder string) *models.CreateEmailCMD {
 	return &models.CreateEmailCMD{
 		Date:    date,
 		From:    from,
@@ -170,5 +171,6 @@ func NewEmail(date string, from string, to string, subject string, xfrom string,
 		XFrom:   xfrom,
 		XTo:     xto,
 		Content: content,
+		Folder:  folder,
 	}
 }

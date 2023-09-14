@@ -24,6 +24,7 @@ func main() {
 	go func() {
 		if true {
 			fmt.Println(scripts.IngestaDeDatos())
+			// fmt.Println("h")
 		}
 	}()
 	// Crear una instancia de EmailGateway

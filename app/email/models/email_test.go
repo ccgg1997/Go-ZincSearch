@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func NewEmail(from string, subject string, to string, xfrom string, xto string, content string, date string) *CreateEmailCMD {
+func NewEmail(from string, subject string, to string, xfrom string, xto string, content string, date string, folder string) *CreateEmailCMD {
 	return &CreateEmailCMD{
 		Date:    date,
 		From:    from,
@@ -14,12 +14,13 @@ func NewEmail(from string, subject string, to string, xfrom string, xto string, 
 		XFrom:   xfrom,
 		XTo:     xto,
 		Content: content,
+		Folder:  folder,
 	}
 }
 
 func Test_correctDateEmail(t *testing.T) {
 	r := NewEmail(
-		"camilo", "test", "camilo", "camilo", "camilo", "test", time.Now().AddDate(0, 0, -2).Format("2006-01-02"))
+		"camilo", "test", "camilo", "camilo", "camilo", "test", time.Now().AddDate(0, 0, -2).Format("2006-01-02"), "local/")
 	err := r.Validate()
 
 	if err != nil {
@@ -30,7 +31,7 @@ func Test_correctDateEmail(t *testing.T) {
 
 func Test_wrongDateEmail(t *testing.T) {
 	r := NewEmail(
-		"camilo", "test", "camilo", "camilo", "camilo", "test", time.Now().AddDate(0, 0, +5).Format("2006-01-02"))
+		"camilo", "test", "camilo", "camilo", "camilo", "test", time.Now().AddDate(0, 0, +5).Format("2006-01-02"), "local/")
 	err := r.Validate()
 
 	if err == nil {
