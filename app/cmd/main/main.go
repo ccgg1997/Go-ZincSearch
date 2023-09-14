@@ -11,7 +11,7 @@ import (
 	"github.com/ccgg1997/Go-ZincSearch/email/gateway"
 	customHTTP "github.com/ccgg1997/Go-ZincSearch/email/http"
 	"github.com/ccgg1997/Go-ZincSearch/email/usecase"
-	"github.com/ccgg1997/Go-ZincSearch/scripts"
+	script "github.com/ccgg1997/Go-ZincSearch/script2"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 
 	go func() {
 		if true {
-			fmt.Println(scripts.IngestaDeDatos())
+			fmt.Println(script.IngestaDeDatos())
 			// fmt.Println("h")
 		}
 	}()
