@@ -1,0 +1,174 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server celler server.",
+        "title": "Swagger Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/email": {
+            "post": {
+                "description": "Store an email entry (It´s an example to add a new email value).",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Index in zincsearch",
+                "parameters": [
+                    {
+                        "description": "Email parameters",
+                        "name": "emailData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/http.EmailData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/http.SuccessResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/query": {
+            "post": {
+                "description": "Perform a search based on the given query. Please note that the query is a string. Search results",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Search text in zincsearch",
+                "parameters": [
+                    {
+                        "description": "Search parameters",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/http.QueryParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/http.SearchResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/zinconection": {
+            "get": {
+                "description": "Check connectivity with ZincSearch",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ZincSearch"
+                ],
+                "summary": "verify conectivity with ZincSearch",
+                "responses": {
+                    "200": {
+                        "description": "La conectividad con ZincSearch esta activa, accede por medio de las peticiones HTTP de la api de email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "http.EmailData": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "xfrom": {
+                    "type": "string"
+                },
+                "xto": {
+                    "type": "string"
+                }
+            }
+        },
+        "http.QueryParam": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string"
+                }
+            }
+        },
+        "http.SearchResult": {
+            "type": "object",
+            "properties": {
+                "Emails Encontrados": {
+                    "type": "string"
+                }
+            }
+        },
+        "http.SuccessResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        }
+    },
+    "externalDocs": {
+        "description": "OpenAPI",
+        "url": "https://swagger.io/resources/open-api/"
+    }
+}

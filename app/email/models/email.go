@@ -41,3 +41,5 @@ func (e *CreateEmailCMD) Validate() error {
 	}
 	return nil
 }
+
+

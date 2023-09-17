@@ -8,12 +8,32 @@ import (
 	"os"
 
 	"github.com/ccgg1997/Go-ZincSearch/api"
+	_ "github.com/ccgg1997/Go-ZincSearch/docs"
 	"github.com/ccgg1997/Go-ZincSearch/email/gateway"
 	customHTTP "github.com/ccgg1997/Go-ZincSearch/email/http"
 	"github.com/ccgg1997/Go-ZincSearch/email/usecase"
 	script "github.com/ccgg1997/Go-ZincSearch/script2"
 )
 
+//	@title			Swagger Example API
+//	@version		1.0
+//	@description	This is a sample server celler server.
+//	@termsOfService	http://swagger.io/terms/
+
+//	@contact.name	API Support
+//	@contact.url	http://www.swagger.io/support
+//	@contact.email	support@swagger.io
+
+//	@license.name	Apache 2.0
+//	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
+
+//	@host		localhost:8080
+//	@BasePath	/
+
+//	@securityDefinitions.basic	BasicAuth
+
+// @externalDocs.description	OpenAPI
+// @externalDocs.url			https://swagger.io/resources/open-api/
 func main() {
 
 	// Iniciar servidor de profiling en un goroutine

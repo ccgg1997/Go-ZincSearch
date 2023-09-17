@@ -14,6 +14,13 @@ actualizar go mod tidy
 gofmt -w . (formato a todo)
 go test -v ./...
 
+//cuando se hacen cambios en el docker file pero se quiere recontruir
+"docker-compose up --build"
+
 //modulos
 go mod init
 go mod tidy (agregar e instalar modulos)
+
+//generar los path de la documentacion de swagger cuando no estan en el main y las funciones estan en otra parte
+swag init
+ -g ../../cmd/main/main.go -o ../../docs
