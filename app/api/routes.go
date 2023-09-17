@@ -1,10 +1,9 @@
 package api
 
 import (
-
+	customHTTP "github.com/ccgg1997/Go-ZincSearch/email/http"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	customHTTP "github.com/ccgg1997/Go-ZincSearch/email/http"
 )
 
 func Routes(emailHandler *customHTTP.EmailHandler) *chi.Mux {
@@ -15,11 +14,10 @@ func Routes(emailHandler *customHTTP.EmailHandler) *chi.Mux {
 
 	// Rutas para emails
 	r.Route("/email", func(r chi.Router) {
-		r.Get("/", emailHandler.ZincSearchHandler)
-		r.Get("/mail", emailHandler.ZincSearchHandler)
+		r.Post("/query", emailHandler.QueryHandler)
+		r.Get("/zinconection", emailHandler.ZincSearchHandler)
 		r.Post("/", emailHandler.CreateEmailHandler)
 	})
 
 	return r
 }
-

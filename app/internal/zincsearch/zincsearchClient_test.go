@@ -1,8 +1,8 @@
 package zincsearch
 
 import (
-	"testing"
 	"os"
+	"testing"
 )
 
 func NEWCLIENT(url, user, password string) *NewZincSearchClient {

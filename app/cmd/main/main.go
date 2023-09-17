@@ -22,11 +22,13 @@ func main() {
 	}()
 
 	go func() {
-		if true {
-			fmt.Println(script.IngestaDeDatos())
-			// fmt.Println("h")
+		ingesta := script.IngestaDeDatos()
+		if ingesta != nil {
+			fmt.Println("<100> Se realizó la ingesta de datos")
 		}
+		fmt.Println("<101> Ya existen los datos. No se realizó la ingesta de datos")
 	}()
+
 	// Crear una instancia de EmailGateway
 	emailGateway := gateway.NewEmailGateway("email")
 	// Crear una instancia de EmailUsecase
