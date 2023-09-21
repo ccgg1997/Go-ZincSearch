@@ -154,7 +154,7 @@ const docTemplate = `{
         "http.SearchResult": {
             "type": "object",
             "properties": {
-                "Emails Encontrados": {
+                "EmailsEncontrados": {
                     "type": "string"
                 }
             }

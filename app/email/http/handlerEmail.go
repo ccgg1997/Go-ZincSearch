@@ -134,14 +134,14 @@ func (eh *EmailHandler) QueryHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	query.Size = 20
+	query.Size = 33
 
 	email, err := eh.emailUsecase.SentQuery(&query)
 	if err != nil {
 		http.Error(w, "Error, formato invalido del body", http.StatusInternalServerError)
 	}
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(map[string]interface{}{"Emails Encontrados": email})
+	json.NewEncoder(w).Encode(map[string]interface{}{"EmailsEncontrados": email})
 }
 
 //estructuras para la documentacion
@@ -155,7 +155,7 @@ type QueryParam struct {
 // SearchResult represents the results of a search query.
 // @Schema
 type SearchResult struct {
-	EmailsEncontrados string `json:"Emails Encontrados"`
+	EmailsEncontrados string `json:"EmailsEncontrados"`
 }
 
 // EmailData represents the structure for the email input.

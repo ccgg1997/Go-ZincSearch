@@ -6,6 +6,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	httpSwagger "github.com/swaggo/http-swagger"
+	"github.com/go-chi/cors"
 )
 
 // @Summary		search text in zincsearch
@@ -20,6 +21,16 @@ func Routes(EmailHandler *customHTTP.EmailHandler) *chi.Mux {
 
 	// Middleware
 	r.Use(middleware.Logger, middleware.Recoverer)
+
+	corsConfig := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: true,
+		MaxAge:           300, 
+	})
+	r.Use(corsConfig.Handler)
 
 	r.Post("/query", EmailHandler.QueryHandler)
 	r.Get("/zinconection", EmailHandler.ZincSearchHandler)
