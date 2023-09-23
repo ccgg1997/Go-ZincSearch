@@ -1,6 +1,6 @@
 # ATENCIÓN (ESTE PROYECTO TIENE UN NUEVO REPOSITORIO CON MEJORAS APARTIR DEL 23/09/2023 ) ESTE ES EL LINK DEL NUEVO REPOSITORIO:
 
-\[Google\](https://github.com/ccgg1997/EmailSearch)
+\[Github\](https://github.com/ccgg1997/EmailSearch)
 
 # API Go con ZincSearch
 
