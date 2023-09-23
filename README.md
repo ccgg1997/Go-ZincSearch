@@ -1,3 +1,6 @@
+#ATENCIÓN (ESTE PROYECTO TIENE UN NUEVO REPOSITORIO CON MEJORAS APARTIR DEL 23/09/2023
+
+
 # API Go con ZincSearch
 
 Este proyecto es una API desarrollada en Go que utiliza ZincSearch.
